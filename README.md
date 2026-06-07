@@ -10,7 +10,7 @@ An original open-source project for civil, building, and tunnel engineering: a b
 
 ![TunnelRiskStudio social preview](assets/social-preview.svg)
 
-## 为什么值得 Star / Why Star This Project
+## 项目亮点 / Project Highlights
 
 - **工程主题明确 / Focused engineering topic**：聚焦隧道施工风险，而不是泛泛的数据仪表盘。 / It focuses on tunnel construction risk instead of a generic dashboard.
 - **能直接运行 / Runs directly**：打开 `index.html` 即可演示，无需安装依赖。 / Open `index.html` and run it without installing dependencies.
@@ -118,8 +118,7 @@ TunnelRiskStudio/
 │   ├── architecture.md
 │   ├── demo-script.md
 │   ├── publish.md
-│   ├── research.md
-│   └── star-growth.md
+│   └── research.md
 ├── src/
 │   ├── app.js
 │   └── styles.css
@@ -164,11 +163,6 @@ Third-party licenses should be checked in their upstream repositories. This repo
 - [ ] PDF/Word 报告导出 / PDF/Word report export
 - [ ] GitHub Pages 在线演示 / GitHub Pages live demo
 
-## 获取更多 Star / Getting More Stars
-
-发布后建议设置仓库描述、Topics 和首个 Release。详细清单见 [docs/star-growth.md](docs/star-growth.md)。  
-After publishing, set the repository description, topics, and first release. See [docs/star-growth.md](docs/star-growth.md) for the checklist.
-
 ## 发布到 GitHub / Publish to GitHub
 
 如果本地已有 Git 和 GitHub CLI：  
@@ -210,4 +204,7 @@ This project is not certified engineering design software or a finished monitori
 
 ## 许可证 / License
 
-MIT License. See [LICENSE](LICENSE).
+本项目使用 MIT License，这是一种宽松的开源软件许可证，允许他人在保留版权和许可声明的前提下使用、修改和分发代码。这里的 “MIT License” 只是许可证名称，不表示麻省理工学院参与、赞助或背书本项目。  
+This project uses the MIT License, a permissive open-source software license that allows use, modification, and distribution when the copyright and license notice are preserved. “MIT License” is the license name only; it does not mean that the Massachusetts Institute of Technology participates in, sponsors, or endorses this project.
+
+See [LICENSE](LICENSE).
