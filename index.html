@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TunnelRiskStudio | 隧道施工风险智能研判 / Tunnel Construction Risk Intelligence</title>
+    <meta
+      name="description"
+      content="面向土木、建筑、隧道工程的原创静态 Web 工具 / An original static Web tool for civil, building, and tunnel engineering risk assessment."
+    />
+    <link rel="stylesheet" href="src/styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true">TR</span>
+        <div>
+          <h1>TunnelRiskStudio</h1>
+          <p>隧道施工风险智能研判台 / Tunnel Risk Intelligence</p>
+        </div>
+      </div>
+      <nav aria-label="页面导航 / Page navigation">
+        <a href="#studio">研判台 / Studio</a>
+        <a href="#method">方法 / Method</a>
+        <a href="#references">参考 / References</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <canvas id="heroCanvas" aria-label="隧道施工监测数字剖面图 / Digital tunnel monitoring section"></canvas>
+        <div class="hero-copy">
+          <span class="eyebrow">Civil + BIM + Tunnel Monitoring</span>
+          <h2>
+            <span>把围岩、支护、建筑物沉降和施工参数放在同一张风险图上。</span>
+            <span>Map ground, support, settlement, and construction parameters into one risk view.</span>
+          </h2>
+          <p>
+            这是一个原创开源项目模板：用浏览器即可运行，用样例数据演示风险评分、主控因素识别、
+            支护策略建议和工程记录导出，适合扩展为课程设计、毕业项目或企业内部原型。
+            <br />
+            This original open-source template runs directly in a browser and demonstrates risk scoring,
+            key driver detection, support strategy suggestions, and engineering record export.
+          </p>
+        </div>
+      </section>
+
+      <section id="studio" class="workspace">
+        <aside class="control-panel" aria-label="风险研判输入 / Risk assessment inputs">
+          <div class="panel-title">
+            <h2>工况输入 / Inputs</h2>
+            <button id="resetBtn" class="icon-button" type="button" title="恢复当前场景 / Reset scenario">↺</button>
+          </div>
+
+          <label>
+            场景 / Scenario
+            <select id="scenarioSelect"></select>
+          </label>
+
+          <label class="file-import">
+            导入监测 CSV / Import Monitoring CSV
+            <input id="csvInput" type="file" accept=".csv,text/csv" />
+            <span id="csvStatus">可导入 data/monitoring-sample.csv 格式 / Supports the sample CSV format</span>
+          </label>
+
+          <label>
+            施工方法 / Construction Method
+            <select id="methodSelect">
+              <option value="tbm">盾构 / TBM</option>
+              <option value="natm">矿山法 / NATM</option>
+              <option value="cutcover">明挖回筑 / Cut-and-cover</option>
+            </select>
+          </label>
+
+          <label>
+            围岩等级 / Ground Class
+            <select id="groundClass">
+              <option value="I">I - 完整坚硬 / Intact hard rock</option>
+              <option value="II">II - 较完整 / Relatively intact</option>
+              <option value="III">III - 中等 / Moderate</option>
+              <option value="IV">IV - 破碎 / Fractured</option>
+              <option value="V">V - 极破碎 / 富水 / Highly fractured or water-rich</option>
+            </select>
+          </label>
+
+          <div class="range-grid">
+            <label>
+              拱顶沉降 / Crown Settlement mm
+              <input id="crownSettlement" type="range" min="0" max="80" step="1" />
+              <output for="crownSettlement"></output>
+            </label>
+            <label>
+              周边收敛 / Convergence mm
+              <input id="convergence" type="range" min="0" max="60" step="1" />
+              <output for="convergence"></output>
+            </label>
+            <label>
+              地表沉降 / Surface Settlement mm
+              <input id="surfaceSettlement" type="range" min="0" max="100" step="1" />
+              <output for="surfaceSettlement"></output>
+            </label>
+            <label>
+              地下水位变化 / Groundwater Change m
+              <input id="waterChange" type="range" min="0" max="10" step="0.1" />
+              <output for="waterChange"></output>
+            </label>
+            <label>
+              支护滞后 / Support Lag m
+              <input id="supportLag" type="range" min="0" max="20" step="0.5" />
+              <output for="supportLag"></output>
+            </label>
+            <label>
+              建筑物距离 / Building Distance m
+              <input id="buildingDistance" type="range" min="3" max="120" step="1" />
+              <output for="buildingDistance"></output>
+            </label>
+            <label>
+              掘进速度 / Advance Rate m/d
+              <input id="advanceRate" type="range" min="0.5" max="28" step="0.5" />
+              <output for="advanceRate"></output>
+            </label>
+            <label>
+              掌子面压力偏差 / Face Pressure Deviation kPa
+              <input id="facePressureDelta" type="range" min="0" max="160" step="2" />
+              <output for="facePressureDelta"></output>
+            </label>
+          </div>
+        </aside>
+
+        <section class="dashboard" aria-live="polite">
+          <div class="score-strip">
+            <div class="score-block">
+              <span>综合风险 / Overall Risk</span>
+              <strong id="riskScore">0</strong>
+              <small id="riskLevel">低风险 / Low Risk</small>
+            </div>
+            <div class="score-block">
+              <span>建议响应 / Response</span>
+              <strong id="responseLevel">A</strong>
+              <small id="responseCopy">常规巡视 / Routine inspection</small>
+            </div>
+            <div class="score-block">
+              <span>主控因素 / Key Drivers</span>
+              <strong id="primaryDriver">-</strong>
+              <small id="secondaryDriver">-</small>
+            </div>
+          </div>
+
+          <div class="viz-layout">
+            <div class="tunnel-card">
+              <div class="section-heading">
+                <h2>剖面联动 / Section View</h2>
+                <span id="chainageLabel">K0+000</span>
+              </div>
+              <canvas id="sectionCanvas" aria-label="隧道、地表建筑和变形风险剖面 / Tunnel, buildings, and deformation risk section"></canvas>
+            </div>
+            <div class="risk-list">
+              <div class="section-heading">
+                <h2>风险贡献 / Risk Drivers</h2>
+                <div class="button-row">
+                  <button id="reportBtn" class="text-button" type="button">导出报告 / Report</button>
+                  <button id="exportBtn" class="text-button" type="button">导出 JSON / JSON</button>
+                </div>
+              </div>
+              <div id="drivers"></div>
+            </div>
+          </div>
+
+          <div class="recommendations">
+            <div class="section-heading">
+              <h2>处置建议 / Recommendations</h2>
+              <span id="timestamp"></span>
+            </div>
+            <ul id="actions"></ul>
+          </div>
+        </section>
+      </section>
+
+      <section id="method" class="method-section">
+        <div>
+          <h2>创新点 / Innovation</h2>
+          <p class="bilingual-copy">
+            <span>
+              本项目以开源土木工具的技术路线为启发，重新设计为轻量化浏览器研判台，核心包括
+              <strong>风险因子归一化</strong>、<strong>场景化权重</strong>、<strong>工程阈值说明</strong>、
+              <strong>可解释输出</strong>、<strong>BIM/监测数据接口预留</strong>。
+            </span>
+            <span>
+              Inspired by open-source civil engineering tools, this project redesigns the workflow as a lightweight browser-based studio with
+              <strong>normalized risk factors</strong>, <strong>scenario-based weights</strong>, <strong>engineering threshold notes</strong>,
+              <strong>explainable outputs</strong>, and <strong>reserved BIM/monitoring data interfaces</strong>.
+            </span>
+          </p>
+        </div>
+        <div class="method-grid">
+          <article>
+            <h3>监测融合 / Monitoring Fusion</h3>
+            <p>把沉降、收敛、水位、支护滞后、建筑物距离和掌子面压力统一映射到 0-100 风险域。<br />Map settlement, convergence, groundwater, support lag, building distance, and face pressure into a 0-100 risk domain.</p>
+          </article>
+          <article>
+            <h3>可解释评分 / Explainable Scoring</h3>
+            <p>输出每个风险因子的贡献值，便于工程师追溯风险来源，而不是只看一个黑箱分数。<br />Show each factor's contribution so engineers can trace why the score changes instead of reading a black-box number.</p>
+          </article>
+          <article>
+            <h3>工程化扩展 / Engineering Extension</h3>
+            <p>预留 IFC/BIM、传感器 CSV、CPT/钻孔资料、有限元结果导入方向，README 中给出路线图。<br />Reserve paths for IFC/BIM, sensor CSV, CPT/borehole records, and finite-element results, with a roadmap in the README.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="references" class="reference-section">
+        <div class="section-heading">
+          <h2>调研到的开源方向 / Open-source Directions</h2>
+          <span>用于灵感和技术路线对照 / Inspiration and technical route comparison</span>
+        </div>
+        <div id="referenceCards" class="reference-grid"></div>
+      </section>
+    </main>
+
+    <footer>
+      <span>MIT Licensed / MIT 许可证</span>
+      <span>原创土木与隧道工程项目脚手架 / Original civil and tunnel engineering project scaffold.</span>
+    </footer>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "id": "metro-soft-ground",
+    "name": "城市地铁软土穿越 / Urban metro in soft ground",
+    "chainage": "K12+380",
+    "method": "tbm",
+    "groundClass": "IV",
+    "crownSettlement": 28,
+    "convergence": 14,
+    "surfaceSettlement": 34,
+    "waterChange": 2.4,
+    "supportLag": 5.5,
+    "buildingDistance": 18,
+    "advanceRate": 12,
+    "facePressureDelta": 46
+  },
+  {
+    "id": "mountain-fault",
+    "name": "山岭隧道断层破碎带 / Mountain tunnel fault fracture zone",
+    "chainage": "YK48+920",
+    "method": "natm",
+    "groundClass": "V",
+    "crownSettlement": 42,
+    "convergence": 31,
+    "surfaceSettlement": 8,
+    "waterChange": 6.8,
+    "supportLag": 9,
+    "buildingDistance": 92,
+    "advanceRate": 3.5,
+    "facePressureDelta": 22
+  },
+  {
+    "id": "station-cutcover",
+    "name": "车站明挖邻近既有建筑 / Cut-and-cover station near existing buildings",
+    "chainage": "DK03+115",
+    "method": "cutcover",
+    "groundClass": "III",
+    "crownSettlement": 10,
+    "convergence": 8,
+    "surfaceSettlement": 58,
+    "waterChange": 3.2,
+    "supportLag": 2,
+    "buildingDistance": 9,
+    "advanceRate": 5,
+    "facePressureDelta": 14
+  }
+]

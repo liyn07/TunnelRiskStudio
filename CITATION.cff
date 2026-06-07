@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "TunnelRiskStudio"
+message: "If you use TunnelRiskStudio in teaching, demos, or research prototypes, please cite it. / 如果你在教学、演示或科研原型中使用 TunnelRiskStudio，请引用它。"
+type: software
+authors:
+  - name: "TunnelRiskStudio contributors"
+repository-code: "https://github.com/YOUR_NAME/TunnelRiskStudio"
+abstract: "An explainable static Web dashboard for tunnel construction risk assessment, monitoring CSV import, and engineering report export. / 一个用于隧道施工风险评估、监测 CSV 导入和工程报告导出的可解释静态 Web 仪表盘。"
+license: MIT
+version: 0.2.0
+date-released: 2026-06-05

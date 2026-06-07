@@ -1,0 +1,9 @@
+timestamp,chainage,metric,value,unit,source
+2026-06-05T08:00:00+08:00,K12+380,crownSettlement,30,mm,total-station
+2026-06-05T08:00:00+08:00,K12+380,convergence,16,mm,convergence-meter
+2026-06-05T08:00:00+08:00,K12+380,surfaceSettlement,38,mm,leveling
+2026-06-05T08:00:00+08:00,K12+380,waterChange,2.8,m,piezometer
+2026-06-05T08:00:00+08:00,K12+380,supportLag,6,m,site-log
+2026-06-05T08:00:00+08:00,K12+380,buildingDistance,16,m,bim-asset
+2026-06-05T08:00:00+08:00,K12+380,advanceRate,13,m/d,tbm-log
+2026-06-05T08:00:00+08:00,K12+380,facePressureDelta,52,kPa,tbm-log
