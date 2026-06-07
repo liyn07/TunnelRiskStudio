@@ -204,7 +204,4 @@ This project is not certified engineering design software or a finished monitori
 
 ## 许可证 / License
 
-本项目使用 MIT License，这是一种宽松的开源软件许可证，允许他人在保留版权和许可声明的前提下使用、修改和分发代码。这里的 “MIT License” 只是许可证名称，不表示麻省理工学院参与、赞助或背书本项目。  
-This project uses the MIT License, a permissive open-source software license that allows use, modification, and distribution when the copyright and license notice are preserved. “MIT License” is the license name only; it does not mean that the Massachusetts Institute of Technology participates in, sponsors, or endorses this project.
-
-See [LICENSE](LICENSE).
+MIT License. See [LICENSE](LICENSE).
