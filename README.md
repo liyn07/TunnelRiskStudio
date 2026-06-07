@@ -204,4 +204,5 @@ This project is not certified engineering design software or a finished monitori
 
 ## 许可证 / License
 
-MIT License. See [LICENSE](LICENSE).
+本项目采用 MIT 开源许可证。详见 [LICENSE](LICENSE)。  
+This project is released under the MIT open-source license. See [LICENSE](LICENSE).
