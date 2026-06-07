@@ -9,7 +9,7 @@ All notable changes to TunnelRiskStudio are documented here.
 - 将风险等级、处置建议、CSV 提示和报告导出改为双语。 / Converted risk levels, recommendations, CSV messages, and report export text to bilingual format.
 - 将 README 和主要文档改为双语。 / Converted README and major documentation files to bilingual format.
 
-## 0.2.0 - Star-ready polish / 面向 Star 的完善
+## 0.2.0 - Repository polish / 仓库展示完善
 
 - Added monitoring CSV import. / 新增监测 CSV 导入。
 - Added Markdown risk report export. / 新增 Markdown 风险报告导出。
